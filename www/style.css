@@ -107,6 +107,13 @@ h1,h2,p{margin:0}
 .eqbar.bad{animation:shake .38s}
 .eqbar.bad .goalnum{border-color:var(--bad);color:var(--bad)}
 .eqbar.demo .slot.filled{opacity:.85}
+.slot.long{font-size:1.1rem}   /* 5 个字符的数，比如 −1.25 */
+/* 320 宽的小屏（iPhone SE 一代、放大显示模式）：三个格子 + 负数目标放不下，整体缩一点 */
+@media (max-width:340px){
+  .eqbar{gap:5px}
+  .slot{width:48px;height:48px;font-size:1.35rem}
+  .goalnum{min-width:56px;height:48px;padding-inline:8px}
+}
 .eq{font-size:1.02rem;font-weight:700;line-height:1.35;min-height:1.35em;text-wrap:balance}
 .eq.good{color:var(--good)} .eq.bad{color:var(--bad)}
 .start-hint{font-size:.82rem;color:var(--soft);font-weight:600;text-wrap:balance}

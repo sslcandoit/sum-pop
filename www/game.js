@@ -224,9 +224,9 @@ function fillSlots(vals, state){
     if (v === undefined){ sl.className = 'slot' + (i>=2 ? ' opt' : ''); sl.textContent = ''; delete sl.dataset.v; return; }
     if (sl.dataset.v !== String(v)){          // 新填进来的数：重新播放弹出动画
       sl.className = 'slot'; void sl.offsetWidth;
-      sl.className = 'slot filled' + (v<0 ? ' neg' : '');
-      sl.style.setProperty('--c', slotColor(v));
       sl.textContent = fmt(v, L.dec); sl.dataset.v = v;
+      sl.className = 'slot filled' + (v<0 ? ' neg' : '') + (sl.textContent.length >= 5 ? ' long' : '');
+      sl.style.setProperty('--c', slotColor(v));
     }
   });
   bar.classList.remove('good', 'bad', 'demo');
@@ -593,16 +593,16 @@ function renderHome(){
     const list = sec.querySelector('.stages');
     idx.forEach((i, n) => {
       const lv = LEVELS[i], open = isUnlocked(i), st = progress[lv.key] || 0, b = best[lv.key];
-      const target = targetText(lv);
+      const title = lv.name ? tr(lv.name) : t('levelTarget', targetText(lv));
       const btn = document.createElement('button');
       btn.className = 'stage' + (open ? '' : ' locked') + (i === cur ? ' current' : '');
       btn.disabled = !open;
       btn.style.setProperty('--c', PALETTE[n % PALETTE.length]);
       const sub = !open ? t('locked') : b ? t('bestGroups', b) : t('notPlayed');
       const end = !open ? LOCK : (i === cur && !st) ? `<span class="pill">${t('playShort')}</span>` : starsSvg(st, 18);
-      btn.innerHTML = `<span class="badge num">${n + 1}</span><span class="info"><span class="title">${t('levelTarget', target)}</span>
+      btn.innerHTML = `<span class="badge num">${n + 1}</span><span class="info"><span class="title">${title}</span>
         <span class="sub num">${sub}</span></span><span class="end">${end}</span>`;
-      btn.setAttribute('aria-label', `${lv.no} ${t('levelTarget', target)}, ${sub}${st ? `, ${st}★` : ''}`);
+      btn.setAttribute('aria-label', `${lv.no} ${title}, ${sub}${st ? `, ${st}★` : ''}`);
       btn.onclick = () => startLevel(i);
       list.appendChild(btn);
     });

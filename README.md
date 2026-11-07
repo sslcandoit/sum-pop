@@ -10,15 +10,22 @@ The game is a plain web page (no framework, no build step), packaged as an iOS a
   <img src="docs/game.png" width="260" alt="Game screen: target is 40, the player has tapped 15">
 </p>
 
-Levels start with "Make 1" and go all the way up to 100, then add negative numbers and decimals:
+There are 113 stages across 12 levels. They start with "Make 1" and build up to mixed challenges with negatives and decimals:
 
-| Level | What it's about |
-|---|---|
-| 1 First Sums | Make 1 to 10, with 0 on the board. 45-second timer, auto-hints when idle (made for young kids) |
-| 2 Teens | Make 11 to 20 |
-| 3 Make Tens | Make 10, 20 … 100 |
-| 4 Negatives | Striped tiles are negative; tap up to 3 numbers |
-| 5 Decimals | The target is a decimal |
+| Level | Stages | What it's about |
+|---|---|---|
+| 1 First Sums | 10 | Make 1 to 10, with 0 on the board. 45-second timer, auto-hints when idle (made for young kids) |
+| 2 Teens | 10 | Make 11 to 20 |
+| 3 Make Tens | 10 | Make 10, 20 … 100 |
+| 4 Big Numbers | 10 | Make 150 up to 1000 |
+| 5 Threes | 10 | Tap up to 3 numbers; most groups need all three |
+| 6 Tiny Boards | 8 | Fewer tiles and fewer answers, on a shorter timer |
+| 7 Negatives | 10 | Striped tiles are negative |
+| 8 Below Zero | 9 | The target is negative too |
+| 9 Decimals | 10 | Tenths, halves and quarters |
+| 10 Pocket Change | 8 | Two decimal places, counted in fives |
+| 11 Blitz | 8 | 30 seconds on the clock |
+| 12 Grand Finale | 10 | Everything at once, with less time |
 
 ---
 
