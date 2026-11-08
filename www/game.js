@@ -49,6 +49,8 @@ let progress = loadRecords(PROGRESS_KEY, 'ccs.progress.v3', 'ccs.progress.v2', '
 let best = loadRecords(BEST_KEY, 'ccs.best.v3', 'ccs.best', 'ccs.shift1.best');
 let soundOn  = store.get('ccs.sound', true);
 let unlockAll= store.get('ccs.unlockAll', false);
+// 测试工具（"解锁全部关卡"按钮）平时对玩家隐藏：快速连点 5 下首页标题打开 / 关上；浏览器里也可以加 ?debug
+let devTools = store.get('ccs.devTools', false) || new URLSearchParams(location.search).has('debug');
 const sysLang = (navigator.languages?.[0] || navigator.language || 'en').toLowerCase();
 let lang = store.get('ccs.lang', sysLang.startsWith('zh') ? 'zh' : 'en');
 function t(key, ...args){ const v = I18N[lang][key] ?? I18N.en[key]; return typeof v === 'function' ? v(...args) : v; }
@@ -410,7 +412,7 @@ document.addEventListener('visibilitychange', () => { lastTick = Date.now(); });
 /* ---------- 关卡流程 ---------- */
 // 已通过的最远一关之前的都算解锁，再加下一关：中间插入新关时，玩家已经打过的后面几关不会被重新锁上
 function furthestPassed(){ let f = -1; LEVELS.forEach((lv, k) => { if (progress[lv.key] > 0) f = k; }); return f; }
-function isUnlocked(i){ return unlockAll || i <= furthestPassed() + 1; }
+function isUnlocked(i){ return (devTools && unlockAll) || i <= furthestPassed() + 1; }
 function startLevel(i){
   stopAll(); hideOverlay();
   L = prep(LEVELS[i], i);
@@ -613,6 +615,7 @@ function renderHome(){
   $('#continueBtn').textContent = t('playTarget', targetText(LEVELS[cur]));
   $('#soundBtn').setAttribute('aria-pressed', soundOn);
   $('#soundBtn').textContent = t(soundOn ? 'soundOn' : 'soundOff');
+  $('#unlockBtn').hidden = !devTools;
   $('#unlockBtn').setAttribute('aria-pressed', unlockAll);
   // 让当前这关出现在屏幕里
   requestAnimationFrame(() => wrap.querySelector('.stage.current')?.scrollIntoView({ block:'nearest' }));
@@ -620,6 +623,13 @@ function renderHome(){
 $('#continueBtn').onclick = () => startLevel(currentIndex());
 $('#soundBtn').onclick = () => { soundOn = !soundOn; store.set('ccs.sound', soundOn); if (soundOn) unlockAudio(); renderHome(); };
 $('#unlockBtn').onclick = () => { unlockAll = !unlockAll; store.set('ccs.unlockAll', unlockAll); renderHome(); };
+let titleTaps = [];
+$('.wordmark').addEventListener('click', () => {
+  const now = Date.now();
+  titleTaps = titleTaps.filter(t => now - t < 2000); titleTaps.push(now);
+  if (titleTaps.length < 5) return;
+  titleTaps = []; devTools = !devTools; store.set('ccs.devTools', devTools); vib('clear'); renderHome();
+});
 $('#langBtn').onclick = () => { lang = lang === 'zh' ? 'en' : 'zh'; store.set('ccs.lang', lang); applyLang(); renderHome(); };
 // 清除进度要二次确认，防止误触
 function confirmReset(){

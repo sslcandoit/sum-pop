@@ -126,6 +126,9 @@ npx cap run ios --target <device id>
 
 - `index.html?level=2-3` jumps straight into level 2, stage 3. A key works too, e.g. `?level=tens-40`
 - `index.html?level=2-3&result=25` shows the results screen as if you'd made 25 groups
+- `index.html?debug` shows the testing tools (see below)
+
+**Testing tools:** the **Unlock all levels (testing)** button is hidden from players. To show it on a device, **tap the "Sum Pop" title on the home screen 5 times quickly**; do the same again to hide it. Unlocking all levels only takes effect while the testing tools are shown.
 
 **Updating the app on your phone after a change:** editing files in `www/` doesn't update the installed app. First run
 
@@ -143,10 +146,10 @@ to copy your changes into the iOS project, then press **▶ Run** in Xcode again
 
 - Membership in the [Apple Developer Program](https://developer.apple.com/programs/) (US$99/year). Free accounts can't publish.
 - An app record in [App Store Connect](https://appstoreconnect.apple.com/) with the Bundle ID `com.sslee.sumpop`.
+- A privacy policy URL, which App Store Connect requires for every app. Use this repo's [PRIVACY.md](PRIVACY.md): `https://github.com/sslcandoit/sum-pop/blob/main/PRIVACY.md`. Update it if the game ever starts collecting data or connecting to the internet.
 
 ### Before each release
 
-- [ ] The **"Unlock all levels (testing)"** button on the home screen is currently visible to every player. Hide or remove it before a public release (`#unlockBtn` in `www/index.html`)
 - [ ] Open `www/index.html?check` and make sure the level settings report no problems
 - [ ] No level `key` has been renamed since the previous release
 
