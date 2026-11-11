@@ -1,6 +1,11 @@
 # App Store 上架资料
 
-在 App Store Connect 里逐项复制粘贴。截图在 [`screenshots/en`](screenshots/en) 和 [`screenshots/zh`](screenshots/zh)，尺寸 1320 × 2868（iPhone 6.9 英寸），按文件名顺序上传。
+在 App Store Connect 里逐项复制粘贴。截图有两套尺寸，内容相同，看 App Store Connect 的截图标签页要哪个尺寸就用哪套，按文件名顺序上传：
+
+| 截图标签页 | 尺寸 | 文件夹 |
+|---|---|---|
+| iPhone 6.9" Display | 1320 × 2868 | [`screenshots/en`](screenshots/en)、[`screenshots/zh`](screenshots/zh) |
+| iPhone 6.1" / 6.3" Display | 1206 × 2622 | [`screenshots-6.3/en`](screenshots-6.3/en)、[`screenshots-6.3/zh`](screenshots-6.3/zh) |
 
 ---
 
