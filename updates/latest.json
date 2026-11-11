@@ -1,4 +1,8 @@
 {
-  "version": 1,
-  "minNative": "1.0"
+  "version": 2,
+  "url": "https://github.com/sslcandoit/sum-pop/releases/download/web-2/www-2.zip",
+  "sha256": "e7d4a68e4b7b68f558c918bf21daa6db29552bce1c805c4cda93c1835319ede8",
+  "minNative": "1.0",
+  "notes": "First hot update: pipeline test (no content changes)",
+  "published": "2026-11-11T18:38:32Z"
 }
