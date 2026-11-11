@@ -7,6 +7,13 @@
 | iPhone 6.9" Display | 1320 × 2868 | [`screenshots/en`](screenshots/en)、[`screenshots/zh`](screenshots/zh) |
 | iPhone 6.1" / 6.3" Display | 1206 × 2622 | [`screenshots-6.3/en`](screenshots-6.3/en)、[`screenshots-6.3/zh`](screenshots-6.3/zh) |
 
+横版宣传图（可选，上传到 App Store Connect 里要求这两个尺寸的地方，比如 Header / Search Results）：
+
+| 尺寸 | 英文 | 中文 |
+|---|---|---|
+| 5244 × 2950 | [`promo/en/promo-5244x2950.png`](promo/en/promo-5244x2950.png) | [`promo/zh/promo-5244x2950.png`](promo/zh/promo-5244x2950.png) |
+| 3840 × 1646 | [`promo/en/promo-3840x1646.png`](promo/en/promo-3840x1646.png) | [`promo/zh/promo-3840x1646.png`](promo/zh/promo-3840x1646.png) |
+
 ---
 
 ## 所有语言通用（App 信息 / 定价 / 隐私）
