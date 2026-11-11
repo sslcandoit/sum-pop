@@ -6,12 +6,14 @@
   "scripts": {
     "sync": "cap sync ios",
     "ios": "cap sync ios && cap open ios",
-    "run:ios": "cap run ios"
+    "run:ios": "cap run ios",
+    "publish-update": "bash scripts/publish-update.sh"
   },
   "dependencies": {
     "@capacitor/core": "^8.5.2",
     "@capacitor/haptics": "^8.0.2",
-    "@capacitor/ios": "^8.5.2"
+    "@capacitor/ios": "^8.5.2",
+    "@capgo/capacitor-updater": "^8.54.2"
   },
   "devDependencies": {
     "@capacitor/cli": "^8.5.2"

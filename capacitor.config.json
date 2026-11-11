@@ -7,5 +7,15 @@
     "contentInset": "never",
     "scrollEnabled": false,
     "backgroundColor": "#E4EFEA"
+  },
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": false,
+      "statsUrl": "",
+      "updateUrl": "",
+      "channelUrl": "",
+      "appReadyTimeout": 10000,
+      "resetWhenUpdate": true
+    }
   }
 }

@@ -705,6 +705,10 @@ function checkLevels(){
 
 applyLang();
 renderHome();
+// 首页最下面显示版本号：App 版本 · 网页内容版本，方便确认热更新到了哪一版（浏览器里只有后者）
+$('#verText').textContent = `v${WEB_VERSION}`;
+window.Capacitor?.Plugins?.CapacitorUpdater?.current?.()
+  .then(r => { $('#verText').textContent = `v${r.native} · ${WEB_VERSION}`; }).catch(() => {});
 const params = new URLSearchParams(location.search);
 const problems = checkLevels();
 if (problems.length) console.warn('关卡配置有问题：\n' + problems.join('\n'));

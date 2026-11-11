@@ -77,6 +77,7 @@ h1,h2,p{margin:0}
 .home-foot{display:flex;flex-wrap:wrap;gap:8px}
 .chip{background:transparent;border:2px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.88rem;font-weight:700;color:var(--soft)}
 .chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.ver{flex-basis:100%;font-size:.75rem;color:var(--soft);opacity:.7}
 /* 底部固定的大按钮：直接玩当前这关 */
 .play-bar{position:sticky;bottom:0;margin-top:auto;margin-inline:-16px;padding:14px 16px 16px;
   background:linear-gradient(to top,var(--ground) 65%,transparent)}

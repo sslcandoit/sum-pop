@@ -114,6 +114,8 @@ npx cap run ios --target <device id>
 | [`www/game.js`](www/game.js) | Gameplay, rendering, home screen, saved progress |
 | [`www/style.css`](www/style.css) | Styles |
 | [`www/index.html`](www/index.html) | Page structure |
+| [`www/updater.js`](www/updater.js), [`www/version.js`](www/version.js) | Hot updates (see below) |
+| [`scripts/publish-update.sh`](scripts/publish-update.sh) | Publishes a hot update |
 | [`design/make_icons.py`](design/make_icons.py) | Generates the app icon and launch screen (needs `pip install pillow`) |
 | `ios/` | The Xcode project; normally you don't edit it by hand |
 
@@ -140,6 +142,37 @@ to copy your changes into the iOS project, then press **▶ Run** in Xcode again
 
 ---
 
+## Hot updates (no App Store review)
+
+Everything in `www/` (levels, gameplay, interface, text) can be updated on players' phones without submitting a new build to the App Store. This uses the open-source [`@capgo/capacitor-updater`](https://github.com/Cap-go/capacitor-updater) plugin, self-hosted on this GitHub repo: no Capgo account or server, and its statistics reporting is turned off.
+
+**How it works**
+
+1. When the app opens, [`www/updater.js`](www/updater.js) reads [`updates/latest.json`](updates/latest.json) from this repo. It holds the newest content version number, a download link to a zip on GitHub Releases, and its SHA-256 checksum.
+2. If that version is newer than the one in the app ([`www/version.js`](www/version.js)), it downloads the zip in the background.
+3. The next time the app is opened from scratch, it switches to the new content before the home screen appears. It never switches while the app is running, so a game in progress is never interrupted.
+4. If the new content fails to start, the plugin rolls back to the previous version within 10 seconds, and the app never downloads that version again.
+
+The version is shown at the bottom of the home screen, e.g. `v1.0 · 3` (app version · content version).
+
+**Publishing an update**
+
+Commit your changes to `www/` first, and open `www/index.html?check` to make sure the levels are valid. Then run:
+
+```sh
+npm run publish-update -- "Short description of the change"
+```
+
+The script bumps `WEB_VERSION`, zips `www/`, creates a GitHub release named `web-<version>` with the zip, and finally updates `updates/latest.json`. Players get it within two app launches. GitHub caches `latest.json` for up to 5 minutes, so some phones may see it a little later.
+
+**What a hot update can't change:** anything native, such as the app icon or name, permissions, Capacitor version or native plugins. Those need a new App Store build. If an update's web code depends on a newer native app, publish it with `MIN_NATIVE=<app version>`, e.g. `MIN_NATIVE=1.1 npm run publish-update -- "..."`; older app versions then won't download it.
+
+**Rolling back:** publish again with the old code (revert the commit, then run `npm run publish-update`). Version numbers only go up, so the "rollback" is simply a newer version containing the old content.
+
+Apple allows downloading code like this as long as it runs in the system WebKit and doesn't change the app's main purpose (App Review Guidelines 3.3.1(B) and 4.7). Updating levels, fixing bugs and polishing the interface are fine; turning the app into something else without review is not.
+
+---
+
 ## Releasing to the App Store / TestFlight (maintainers)
 
 ### Prerequisites
@@ -163,7 +196,7 @@ to copy your changes into the iOS project, then press **▶ Run** in Xcode again
 4. **Upload:** when archiving finishes, the Organizer window opens. Select the new archive and click **Distribute App → App Store Connect → Upload**.
 5. **Test:** after a few minutes (sometimes longer), the build appears under **TestFlight** in App Store Connect. Add testers; they install the TestFlight app on their iPhone and can play without a Mac.
 6. **Submit for review:** in App Store Connect, add screenshots and a description, select the build, and click **Add for Review**.
-   For the privacy questionnaire you can answer **Data Not Collected**: the game makes no network requests and keeps progress only on the device.
+   For the privacy questionnaire you can answer **Data Not Collected**: the only network requests are update checks to GitHub, which send no user data, and progress stays on the device.
 7. **Tag the release in git:**
 
    ```sh
