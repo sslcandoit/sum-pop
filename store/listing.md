@@ -35,12 +35,28 @@
 
 ### 给审核人员的备注（App Review Information → Notes）
 
+第一次提交被要求补充信息（Guideline 2.1 - Information Needed）后改成了下面这版，逐条回答了审核提出的 1–6 项。录屏作为附件上传到同一页的 Attachment。
+
 ```
-No account or login is needed; the game is fully playable offline.
+1. SCREEN RECORDING
+Attached in the Attachment field below: recorded on an iPhone 15 Plus running the latest iOS, starting from launching the app and showing the typical flow (home screen, playing a stage, a wrong answer, a hint, finishing a stage, the results screen, moving to the next stage, and the settings). The app has no account registration or login, no user-generated content, and no paid content or in-app purchases.
 
-On launch the app reads a small JSON file from our GitHub repository (github.com/sslcandoit/sum-pop) and may download updated game content (levels, layout and fixes as HTML/JS/CSS). This content runs only in the system WKWebView, does not change the app's purpose or features, and is consistent with guideline 3.3.1(B). No user data is sent.
+2. PURPOSE AND AUDIENCE
+Sum Pop is a casual math puzzle game. The player taps numbers on a board that add up to a target number; each correct group disappears and new numbers fall in. Clearing enough groups before the timer ends passes the stage and earns up to three stars. There are 113 stages in 12 levels, from adding small numbers (with automatic hints, for young children) up to larger numbers, negative numbers and decimals.
+It is for children learning addition and for adults who enjoy quick number puzzles. It turns mental-arithmetic practice into short, game-like rounds, so it feels like play rather than homework.
 
-Tip for reviewing later levels: tap the "Sum Pop" title on the home screen 5 times quickly to show an "Unlock all levels (testing)" button.
+3. HOW TO USE THE MAIN FEATURES
+No login, credentials or setup are needed. Open the app and tap "Play" at the bottom of the home screen to start the current stage. Tap two numbers (in later levels up to three) that add up to the target shown at the top. The timer starts on the first tap. "Hint" highlights a valid group, "Clear" deselects, "Restart" starts the stage over. When time runs out, the results screen shows stars and the best score, and the next stage unlocks. The home screen also has buttons to switch language (English/Chinese), turn sound on or off, and reset progress.
+Stages unlock in order. To review later stages quickly: tap the "Sum Pop" title on the home screen 5 times quickly; an "Unlock all levels (testing)" button appears below.
+
+4. EXTERNAL SERVICES
+The game itself runs entirely on the device and works offline. The only external service is GitHub (github.com / raw.githubusercontent.com), used to deliver content updates: on launch the app reads a small JSON file from our public repository (github.com/sslcandoit/sum-pop) and, if newer game content (levels, layout, fixes as HTML/JS/CSS) is available, downloads it from GitHub Releases. This content runs only in the system WKWebView and does not change the app's purpose or features (guideline 3.3.1(B)). The update mechanism uses the open-source Capacitor Updater plugin, self-hosted; no third-party update server is used and its statistics reporting is disabled. No user data is sent anywhere. There are no data providers, authentication services, payment processors, analytics, advertising or AI services.
+
+5. REGIONAL DIFFERENCES
+None. The app works the same in all regions where it is available. The interface language follows the device language (English or Simplified Chinese) and can be switched in the app; the gameplay and content are identical in both languages.
+
+6. REGULATED INDUSTRY / THIRD-PARTY MATERIAL
+Not applicable. The app is not in a regulated industry and contains no protected third-party material. All game content and artwork are our own; the only third-party asset is the "Baloo 2" font, licensed under the SIL Open Font License, which allows use in commercial apps.
 ```
 
 联系人信息（姓名、电话、邮箱）填你自己的。
